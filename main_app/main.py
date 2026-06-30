@@ -217,8 +217,19 @@ def main():
             video_processor_factory=VideoProcessorClass,
             rtc_configuration={
                 "iceServers": [
+                    {"urls": "stun:stun.relay.metered.ca:80"},
+                    {
+                        "urls": "turn:standard.relay.metered.ca:80",
+                        "username": "openrelayproject",
+                        "credential": "openrelayproject",
+                    },
                     {
                         "urls": "turn:standard.relay.metered.ca:80?transport=tcp",
+                        "username": "openrelayproject",
+                        "credential": "openrelayproject",
+                    },
+                    {
+                        "urls": "turn:standard.relay.metered.ca:443",
                         "username": "openrelayproject",
                         "credential": "openrelayproject",
                     },
@@ -229,7 +240,7 @@ def main():
                     },
                 ]
             },
-            
+
             media_stream_constraints={
                 "video": True,
                 "audio": False
