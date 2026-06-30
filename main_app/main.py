@@ -215,32 +215,11 @@ def main():
             key="exercise-analysis",
             mode=WebRtcMode.SENDRECV,
             video_processor_factory=VideoProcessorClass,
-            rtc_configuration={
-                "iceServers": [
-                    {"urls": "stun:stun.relay.metered.ca:80"},
-                    {
-                        "urls": "turn:standard.relay.metered.ca:80",
-                        "username": "openrelayproject",
-                        "credential": "openrelayproject",
-                    },
-                    {
-                        "urls": "turn:standard.relay.metered.ca:80?transport=tcp",
-                        "username": "openrelayproject",
-                        "credential": "openrelayproject",
-                    },
-                    {
-                        "urls": "turn:standard.relay.metered.ca:443",
-                        "username": "openrelayproject",
-                        "credential": "openrelayproject",
-                    },
-                    {
-                        "urls": "turns:standard.relay.metered.ca:443?transport=tcp",
-                        "username": "openrelayproject",
-                        "credential": "openrelayproject",
-                    },
-                ]
-            },
-
+           context = webrtc_streamer(
+            key="exercise-analysis",
+            mode=WebRtcMode.SENDRECV,
+            video_processor_factory=VideoProcessorClass,
+            rtc_configuration={"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]},
             media_stream_constraints={
                 "video": True,
                 "audio": False
