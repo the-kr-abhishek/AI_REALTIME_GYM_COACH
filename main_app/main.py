@@ -49,7 +49,7 @@ def main():
             st.session_state.voice_pipeline = VoicePipeline(llm_coach, tts)
         except Exception as e:
             st.session_state.voice_pipeline = None
-            st.session_state.voice_pipeline_error = f"{type(e).__name__}: {e}"###########################
+            st.session_state.voice_pipeline_error = f"{type(e).__name__}: {e}"
 
     workout_started = st.session_state.get("workout_started", False)
     
@@ -179,7 +179,7 @@ def main():
     st.title("AI Real-time GYM Coach")
     st.markdown("#### Real-time pose detection with proactive AI voice coaching")
 
-    if st.session_state.get("voice_pipeline_error"):################################################
+    if st.session_state.get("voice_pipeline_error"):
        st.error(f"Voice pipeline failed to init: {st.session_state.voice_pipeline_error}")
  
     if st.session_state.get("audio_to_play"):
@@ -215,7 +215,31 @@ def main():
             key="exercise-analysis",
             mode=WebRtcMode.SENDRECV,
             video_processor_factory=VideoProcessorClass,
-            rtc_configuration={"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]},
+            rtc_configuration={
+                "iceServers": [
+                    {"urls": "stun:stun.relay.metered.ca:80"},
+                    {
+                        "urls": "turn:standard.relay.metered.ca:80",
+                        "username": "openrelayproject",
+                        "credential": "openrelayproject",
+                    },
+                    {
+                        "urls": "turn:standard.relay.metered.ca:80?transport=tcp",
+                        "username": "openrelayproject",
+                        "credential": "openrelayproject",
+                    },
+                    {
+                        "urls": "turn:standard.relay.metered.ca:443",
+                        "username": "openrelayproject",
+                        "credential": "openrelayproject",
+                    },
+                    {
+                        "urls": "turns:standard.relay.metered.ca:443?transport=tcp",
+                        "username": "openrelayproject",
+                        "credential": "openrelayproject",
+                    },
+                ]
+            },
             media_stream_constraints={
                 "video": True,
                 "audio": False
