@@ -211,11 +211,36 @@ def main():
             unsafe_allow_html=True,
         )
     else:
+    
+
+        rtc_configuration = {
+            "iceServers": [
+                {
+                    "urls": ["stun:stun.metered.ca:80"]
+                },
+                {
+                    "urls": ["turn:standard.relay.metered.ca:80"],
+                    "username": st.secrets["METERED_USERNAME"],
+                    "credential": st.secrets["METERED_CREDENTIAL"]
+                },
+                {
+                    "urls": ["turn:standard.relay.metered.ca:443"],
+                    "username": st.secrets["METERED_USERNAME"],
+                    "credential": st.secrets["METERED_CREDENTIAL"]
+                },
+                {
+                    "urls": ["turns:standard.relay.metered.ca:443"],
+                    "username": st.secrets["METERED_USERNAME"],
+                    "credential": st.secrets["METERED_CREDENTIAL"]
+                }
+            ]
+        }
+
         context = webrtc_streamer(
             key="exercise-analysis",
             mode=WebRtcMode.SENDRECV,
             video_processor_factory=VideoProcessorClass,
-            rtc_configuration={"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]},
+            rtc_configuration=rtc_configuration,
             media_stream_constraints={
                 "video": True,
                 "audio": False
