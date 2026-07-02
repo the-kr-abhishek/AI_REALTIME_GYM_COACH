@@ -16,7 +16,7 @@ https://ai-realtimegymcoach.streamlit.app/
 
 > **Note:** This demo video is muted for easier viewing. In the live application, AI-generated voice coaching is played automatically based on workout events and detected form issues.
 
-<Demo video will be added after upload>
+https://github.com/user-attachments/assets/63cc43ee-aad1-4cd4-92fd-ddfcc51d1b17
 ---
 
 # 📸 Screenshots
